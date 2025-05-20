@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #121212; /* Fond sombre */
+    color: #e0e0e0; /* Texte clair */
+    font-family: Arial, sans-serif;
+}
+
+#grid, #editor-grid {
+    display: grid;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    background-color: #000000; /* Fond de la grille */
+    border: 1px solid #000000; /* Bordure subtile */
+}
+
+#grid button:active {
+    background-color: #000000; /* Fond lors du clic */
+}
+
+#grid > *, #editor-grid > * {
+    font-size: 16px;
+    text-align: center;
+    background-color: #2b2b2b; /* Fond des boutons */
+    border: 0px;
+    color: #e0e0e0; /* Texte clair */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#grid > *:active, #editor-grid > *:active {
+    background-color: #555; /* Fond lors du clic */
+    cursor: grabbing;
+}
+
+#button-properties {
+    padding: 10px;
+    background-color: #1e1e1e; /* Fond sombre */
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    width: 100%;
+    border-bottom: 1px solid #333; /* Ligne de séparation */
+}
+
+#button-properties div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#button-properties label {
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    color: #e0e0e0; /* Texte clair */
+}
+
+#button-properties input, #button-properties button {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2e2e2e; /* Fond des champs */
+    color: #e0e0e0; /* Texte clair */
+}
+
+/* Réduction de la taille uniquement pour les champs spécifiques */
+#cols-input,
+#rows-input{
+    width: 80px; /* Taille réduite */
+}
+
+#button-colspan,
+#button-rowspan {
+    width: 60px; /* Taille réduite */
+}
+
+#button-action,
+#button-label {
+    width: 150px; /* Taille réduite */
+}
+
+#button-properties input:focus, #button-properties button:hover {
+    background-color: #3e3e3e; /* Fond au survol ou focus */
+    color: #ffffff; /* Texte plus clair */
+    outline: none;
+}
+
+#button-properties button {
+    cursor: pointer;
+}
+
+#button-properties button:active {
+    background-color: #555; /* Fond lors du clic */
+}

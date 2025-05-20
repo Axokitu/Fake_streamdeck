@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur d'interface</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Section pour afficher et modifier les caractéristiques -->
+    <div id="button-properties">
+        <div>
+            <button id="add-button">Ajouter un bouton</button>
+            <button id="delete-button">Supprimer le bouton</button>
+            <label for="cols-input">Colonnes :</label>
+            <input type="number" id="cols-input" value="10" min="1">
+            <label for="rows-input">Lignes :</label>
+            <input type="number" id="rows-input" value="10" min="1">
+        </div>
+        <div>
+            <label for="button-label">Nom :</label>
+            <input type="text" id="button-label">
+            <label for="button-action">Action :</label>
+            <input type="text" id="button-action">
+            <label for="button-colspan">Colspan :</label>
+            <input type="number" id="button-colspan" min="1">
+            <label for="button-rowspan">Rowspan :</label>
+            <input type="number" id="button-rowspan" min="1">
+        </div>
+    </div>
+
+    <div id="editor-grid"></div>
+    <script src="/js/editor.js"></script>
+</body>
+</html>

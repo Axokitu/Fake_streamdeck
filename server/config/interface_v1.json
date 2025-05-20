@@ -1,0 +1,98 @@
+{
+  "grid": {
+    "cols": 100,
+    "rows": 100
+  },
+  "elements": [
+    {
+      "type": "button",
+      "id": "1",
+      "label": "Discord",
+      "action": "",
+      "col": 19,
+      "row": 10,
+      "colspan": 60,
+      "rowspan": 4
+    },
+    {
+      "type": "button",
+      "id": "2",
+      "label": "Push/Active",
+      "action": "key_alt+ctrl+shift+f10",
+      "col": 59,
+      "row": 14,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "3",
+      "label": "Mic",
+      "action": "key_alt+ctrl+shift+f11",
+      "col": 39,
+      "row": 14,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "4",
+      "label": "Mute all",
+      "action": "key_alt+ctrl+shift+f12",
+      "col": 19,
+      "row": 14,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "5",
+      "label": "Media",
+      "action": "",
+      "col": 19,
+      "row": 43,
+      "colspan": 60,
+      "rowspan": 4
+    },
+    {
+      "type": "button",
+      "id": "6",
+      "label": "Pause",
+      "action": "key_playpause",
+      "col": 39,
+      "row": 67,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "7",
+      "label": "-",
+      "action": "key_volumedown",
+      "col": 59,
+      "row": 47,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "8",
+      "label": "Mute",
+      "action": "key_volumemute",
+      "col": 39,
+      "row": 47,
+      "colspan": 20,
+      "rowspan": 20
+    },
+    {
+      "type": "button",
+      "id": "9",
+      "label": "+",
+      "action": "key_volumeup",
+      "col": 19,
+      "row": 47,
+      "colspan": 20,
+      "rowspan": 20
+    }
+  ]
+}
