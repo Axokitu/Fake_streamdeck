@@ -22,6 +22,18 @@ html, body {
     border: 1px solid #000000; /* Bordure subtile */
 }
 
+#editor-grid {
+    display: grid;
+    gap: 5px;
+    width: 100%;
+    height: calc(100% - 50px); /* Ajuster la hauteur en fonction de la hauteur de #button-properties */
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    background-color: #000000; /* Fond de la grille */
+    border: 1px solid #000000; /* Bordure subtile */
+    box-sizing: border-box; /* Inclure les bordures et paddings dans la largeur totale */
+}
+
 #grid button:active {
     background-color: #000000; /* Fond lors du clic */
 }
@@ -48,7 +60,7 @@ html, body {
     background-color: #1e1e1e; /* Fond sombre */
     display: flex;
     flex-direction: row;
-    gap: 150px;
+    gap: 100px;
     width: 100%;
     border-bottom: 1px solid #333; /* Ligne de séparation */
 }

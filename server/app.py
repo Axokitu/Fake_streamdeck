@@ -21,9 +21,9 @@ def editor():
 def handle_command():
     data = request.json
     action = data.get('action')
+    config_path = os.path.join(os.path.dirname(__file__), 'config', 'interface_v1.json')
     
-    print(action[0:3], action[4], len(action))
-    
+    #racourci clavier
     if action[0:3] == "key" and len(action) == 5:
         pyautogui.press(action[4])
         print("Key",action[4], "pressed")
@@ -31,7 +31,22 @@ def handle_command():
         keys = action[4:].split('+')
         pyautogui.hotkey(*keys)
         print("Key",keys , "pressed")
-    return jsonify({"status": "success"})
+    
+    #changement de page
+    elif action[0:9] == "set_page_":
+        new_page = action[9:]
+        try:
+            with open(config_path, 'r') as file:
+                config = json.load(file)
+
+            config['nb_page'] = int(new_page)
+
+            with open(config_path, 'w') as file:
+                json.dump(config, file, indent=2)
+
+            return jsonify({"status": "success", "nb_page": new_page})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
 # Route pour charger le fichier JSON
 @app.route('/config/interface_v1.json', methods=['GET'])

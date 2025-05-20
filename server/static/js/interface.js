@@ -9,39 +9,49 @@ document.addEventListener("DOMContentLoaded", () => {
     setGridHeight();
     window.addEventListener("resize", setGridHeight);
 
+    let currentPage = 1;
+
     // Charger le fichier JSON de config
     fetch('/config/interface_v1.json')
         .then(response => response.json())
         .then(data => {
-            const { grid: gridConfig, elements } = data;
+            const { grid: gridConfig, elements, nb_page } = data;
+            currentPage = nb_page || 1;
 
             // Définir la grille selon la config dynamique
             grid.style.display = "grid";
             grid.style.gridTemplateColumns = `repeat(${gridConfig.cols}, 1fr)`;
             grid.style.gridTemplateRows = `repeat(${gridConfig.rows}, 1fr)`;
 
-            // Ajouter les éléments à la grille
-            elements.forEach(element => {
-                if (element.type === "button") {
-                    const button = document.createElement("button");
-                    button.textContent = element.label;
+            // Ajouter les éléments de la page actuelle à la grille
+            elements
+                .filter(element => element.page === currentPage)
+                .forEach(element => {
+                    if (element.type === "button") {
+                        const button = document.createElement("button");
+                        button.textContent = element.label;
 
-                    // Positionner le bouton dans la grille
-                    button.style.gridColumn = `${element.col} / span ${element.colspan}`;
-                    button.style.gridRow = `${element.row} / span ${element.rowspan}`;
+                        // Positionner le bouton dans la grille
+                        button.style.gridColumn = `${element.col} / span ${element.colspan}`;
+                        button.style.gridRow = `${element.row} / span ${element.rowspan}`;
 
-                    // Événement clic : envoi POST à l’API
-                    button.addEventListener("click", () => {
-                        fetch('/api/command', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ action: element.action })
+                        // Événement clic : envoi POST à l’API et rechargement de la page
+                        button.addEventListener("click", () => {
+                            fetch('/api/command', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ action: element.action })
+                            }).then(() => {
+                                // Recharger toute la page après un délai de 500 ms
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 10);
+                            });
                         });
-                    });
 
-                    grid.appendChild(button);
-                }
-            });
+                        grid.appendChild(button);
+                    }
+                });
         })
         .catch(err => console.error("Erreur lors du chargement de l'interface :", err));
 });

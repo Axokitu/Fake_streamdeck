@@ -3,7 +3,74 @@
     "cols": 100,
     "rows": 100
   },
+  "nb_page": 1,
   "elements": [
+    {
+      "action": "",
+      "col": 19,
+      "colspan": 60,
+      "id": "5",
+      "label": "Media",
+      "page": 2,
+      "row": 43,
+      "rowspan": 4,
+      "type": "button"
+    },
+    {
+      "action": "key_playpause",
+      "col": 39,
+      "colspan": 20,
+      "id": "6",
+      "label": "Pause",
+      "page": 2,
+      "row": 67,
+      "rowspan": 20,
+      "type": "button"
+    },
+    {
+      "action": "key_volumedown",
+      "col": 59,
+      "colspan": 20,
+      "id": "7",
+      "label": "-",
+      "page": 2,
+      "row": 47,
+      "rowspan": 20,
+      "type": "button"
+    },
+    {
+      "action": "key_volumemute",
+      "col": 39,
+      "colspan": 20,
+      "id": "8",
+      "label": "Mute",
+      "page": 2,
+      "row": 47,
+      "rowspan": 20,
+      "type": "button"
+    },
+    {
+      "action": "key_volumeup",
+      "col": 19,
+      "colspan": 20,
+      "id": "9",
+      "label": "+",
+      "page": 2,
+      "row": 47,
+      "rowspan": 20,
+      "type": "button"
+    },
+    {
+      "action": "set_page_1",
+      "col": 42,
+      "colspan": 10,
+      "id": "1",
+      "label": "Bouton 1",
+      "page": 2,
+      "row": 26,
+      "rowspan": 10,
+      "type": "button"
+    },
     {
       "type": "button",
       "id": "1",
@@ -12,7 +79,8 @@
       "col": 19,
       "row": 10,
       "colspan": 60,
-      "rowspan": 4
+      "rowspan": 4,
+      "page": 1
     },
     {
       "type": "button",
@@ -22,7 +90,8 @@
       "col": 59,
       "row": 14,
       "colspan": 20,
-      "rowspan": 20
+      "rowspan": 20,
+      "page": 1
     },
     {
       "type": "button",
@@ -32,7 +101,8 @@
       "col": 39,
       "row": 14,
       "colspan": 20,
-      "rowspan": 20
+      "rowspan": 20,
+      "page": 1
     },
     {
       "type": "button",
@@ -42,57 +112,19 @@
       "col": 19,
       "row": 14,
       "colspan": 20,
-      "rowspan": 20
+      "rowspan": 20,
+      "page": 1
     },
     {
       "type": "button",
       "id": "5",
-      "label": "Media",
-      "action": "",
-      "col": 19,
-      "row": 43,
-      "colspan": 60,
-      "rowspan": 4
-    },
-    {
-      "type": "button",
-      "id": "6",
-      "label": "Pause",
-      "action": "key_playpause",
-      "col": 39,
-      "row": 67,
-      "colspan": 20,
-      "rowspan": 20
-    },
-    {
-      "type": "button",
-      "id": "7",
-      "label": "-",
-      "action": "key_volumedown",
-      "col": 59,
-      "row": 47,
-      "colspan": 20,
-      "rowspan": 20
-    },
-    {
-      "type": "button",
-      "id": "8",
-      "label": "Mute",
-      "action": "key_volumemute",
-      "col": 39,
-      "row": 47,
-      "colspan": 20,
-      "rowspan": 20
-    },
-    {
-      "type": "button",
-      "id": "9",
-      "label": "+",
-      "action": "key_volumeup",
-      "col": 19,
-      "row": 47,
-      "colspan": 20,
-      "rowspan": 20
+      "label": "Bouton 5",
+      "action": "set_page_2",
+      "col": 44,
+      "row": 50,
+      "colspan": 10,
+      "rowspan": 10,
+      "page": 1
     }
   ]
 }

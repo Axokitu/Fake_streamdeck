@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const buttonActionInput = document.getElementById("button-action");
     const buttonColspanInput = document.getElementById("button-colspan");
     const buttonRowspanInput = document.getElementById("button-rowspan");
+    const buttonPageInput = document.getElementById("button-page"); // Nouveau champ pour la page
     const deleteButton = document.getElementById("delete-button");
 
     // Stocker les éléments ajoutés
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Compteur global pour les IDs uniques
     let buttonIdCounter = 1;
+    let currentPage = 1; // Page actuelle
 
     // Fonction pour charger les données depuis interface_v1.json
     const loadData = async () => {
@@ -25,23 +27,27 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Charger les dimensions de la grille
             colsInput.value = data.grid.cols;
             rowsInput.value = data.grid.rows;
-            updateGridSize();
 
-            // Charger les boutons
-            data.elements.forEach(element => {
-                const button = document.createElement("div");
-                button.classList.add("editor-element");
-                button.textContent = element.label;
-                button.style.gridColumn = `${element.col} / span ${element.colspan}`;
-                button.style.gridRow = `${element.row} / span ${element.rowspan}`;
-                button.draggable = true;
+            // Réinitialiser la grille et les éléments
+            grid.innerHTML = "";
+            elements.length = 0;
 
-                // Ajouter les événements au bouton
-                attachButtonEvents(button, element);
+            // Charger les boutons de la page actuelle
+            data.elements
+                .filter(element => element.page === currentPage)
+                .forEach(element => {
+                    const button = document.createElement("div");
+                    button.classList.add("editor-element");
+                    button.textContent = element.label;
+                    button.style.gridColumn = `${element.col} / span ${element.colspan}`;
+                    button.style.gridRow = `${element.row} / span ${element.rowspan}`;
+                    button.draggable = true;
 
-                grid.appendChild(button);
-                elements.push(element);
-            });
+                    attachButtonEvents(button, element);
+
+                    grid.appendChild(button);
+                    elements.push(element);
+                });
         } catch (error) {
             console.error("Erreur lors du chargement des données :", error);
         }
@@ -107,6 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             buttonActionInput.value = element.action;
             buttonColspanInput.value = element.colspan;
             buttonRowspanInput.value = element.rowspan;
+            buttonPageInput.value = element.page; // Charger la page du bouton
 
             // Stocker l'élément actuellement sélectionné
             buttonLabelInput.dataset.currentButton = element.id;
@@ -151,12 +158,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fonction pour exporter les données dans interface_v1.json
     const exportDataToJson = async () => {
-        const exportData = {
-            grid: {
-                cols: parseInt(colsInput.value, 10),
-                rows: parseInt(rowsInput.value, 10)
-            },
-            elements: elements.map(element => ({
+        try {
+            // Charger les données existantes
+            const response = await fetch('/config/interface_v1.json');
+            const existingData = await response.json();
+
+            // Mettre à jour les données pour la page actuelle
+            const updatedElements = existingData.elements.filter(el => el.page !== currentPage);
+            updatedElements.push(...elements.map(element => ({
                 type: "button",
                 id: element.id,
                 label: element.label,
@@ -164,26 +173,36 @@ document.addEventListener("DOMContentLoaded", async () => {
                 col: element.col,
                 row: element.row,
                 colspan: element.colspan,
-                rowspan: element.rowspan
-            }))
-        };
+                rowspan: element.rowspan,
+                page: element.page
+            })));
 
-        try {
-            const response = await fetch('/config/interface_v1.json', {
+            // Construire les nouvelles données
+            const exportData = {
+                grid: {
+                    cols: parseInt(colsInput.value, 10),
+                    rows: parseInt(rowsInput.value, 10)
+                },
+                nb_page: existingData.nb_page, // Conserver le nombre de pages
+                elements: updatedElements
+            };
+
+            // Exporter les données mises à jour
+            const exportResponse = await fetch('/config/interface_v1.json', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(exportData)
+                body: JSON.stringify(exportData, null, 2) // Formater les données pour éviter les erreurs
             });
 
-            if (response.ok) {
-                console.log("Données exportées avec succès !");
-            } else {
-                console.error("Erreur lors de l'exportation :", response.statusText);
+            if (!exportResponse.ok) {
+                throw new Error(`Erreur lors de l'exportation : ${exportResponse.statusText}`);
             }
+
+            console.log("Données exportées avec succès !");
         } catch (error) {
-            console.error("Erreur lors de l'exportation :", error);
+            console.error("Erreur lors de l'exportation des données :", error);
         }
     };
 
@@ -258,11 +277,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             id,
             type: "button",
             label: `Bouton ${id}`,
-            action: "key_a",
+            action: "",
             col: 1,
             row: 1,
             colspan: 10,
-            rowspan: 10
+            rowspan: 10,
+            page: currentPage // Associer le bouton à la page actuelle
         };
 
         const button = document.createElement("div");
@@ -274,7 +294,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         attachButtonEvents(button, element);
 
         grid.appendChild(button);
-        elements.push(element);
+        elements.push(element); // Ajouter le bouton à la liste des éléments
 
         // Exporter les données après ajout
         exportDataToJson();
@@ -349,6 +369,23 @@ document.addEventListener("DOMContentLoaded", async () => {
         return id.toString(); // Retourner l'ID libre sous forme de chaîne
     };
 
+    // Fonction pour changer de page
+    const changePage = (newPage) => {
+        currentPage = newPage;
+        loadData();
+    };
+
     // Initialiser la grille avec la taille par défaut
     updateGridSize();
+
+    buttonPageInput.addEventListener("input", () => {
+        const newPage = parseInt(buttonPageInput.value, 10);
+
+        if (!isNaN(newPage) && newPage > 0) {
+            currentPage = newPage; // Mettre à jour la page actuelle
+            loadData(); // Recharger les boutons pour la nouvelle page
+        } else {
+            console.error("Numéro de page invalide !");
+        }
+    });
 });
