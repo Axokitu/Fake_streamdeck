@@ -94,6 +94,7 @@ html, body {
 }
 
 #button-colspan,
+#button-page,
 #button-rowspan {
     width: 60px; /* Taille réduite */
 }
