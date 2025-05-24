@@ -79,5 +79,10 @@ def serve_css(filename):
 def serve_js(filename):
     return send_from_directory(os.path.join(app.static_folder, 'js'), filename)
 
+@app.route('/config/<path:filename>')
+def serve_config(filename):
+    config_dir = os.path.join(os.path.dirname(__file__), 'config')
+    return send_from_directory(config_dir, filename)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

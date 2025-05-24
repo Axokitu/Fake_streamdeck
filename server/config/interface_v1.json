@@ -1,9 +1,4 @@
 {
-  "grid": {
-    "cols": 100,
-    "rows": 100
-  },
-  "nb_page": 1,
   "elements": [
     {
       "action": "set_page_3",
@@ -50,125 +45,136 @@
       "type": "button"
     },
     {
-      "type": "button",
+      "action": "",
+      "col": 2,
+      "colspan": 60,
       "id": "1",
       "label": "Discord",
-      "action": "",
-      "col": 2,
+      "page": 1,
       "row": 58,
-      "colspan": 60,
       "rowspan": 4,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "2",
-      "label": "Push/Active",
       "action": "key_alt+ctrl+shift+f10",
       "col": 42,
-      "row": 62,
       "colspan": 20,
+      "id": "2",
+      "label": "Push/Active",
+      "page": 1,
+      "row": 62,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "3",
-      "label": "Mic",
       "action": "key_alt+ctrl+shift+f11",
       "col": 22,
-      "row": 62,
       "colspan": 20,
+      "id": "3",
+      "label": "Mic",
+      "page": 1,
+      "row": 62,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "4",
-      "label": "Mute all",
       "action": "key_alt+ctrl+shift+f12",
       "col": 2,
-      "row": 62,
       "colspan": 20,
+      "id": "4",
+      "label": "Mute all",
+      "page": 1,
+      "row": 62,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "5",
-      "label": "Home",
       "action": "set_page_3",
       "col": 2,
-      "row": 3,
       "colspan": 6,
+      "id": "5",
+      "label": "Home",
+      "page": 1,
+      "row": 3,
       "rowspan": 10,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "6",
-      "label": "Media",
       "action": "",
       "col": 2,
-      "row": 13,
       "colspan": 60,
+      "id": "6",
+      "label": "Media",
+      "page": 1,
+      "row": 13,
       "rowspan": 4,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "7",
-      "label": "+",
       "action": "key_volumeup",
       "col": 2,
-      "row": 17,
       "colspan": 20,
+      "id": "7",
+      "label": "+",
+      "page": 1,
+      "row": 17,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "8",
-      "label": "Mute",
       "action": "key_volumemute",
       "col": 22,
-      "row": 17,
       "colspan": 20,
+      "id": "8",
+      "label": "Mute",
+      "page": 1,
+      "row": 17,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "9",
-      "label": "-",
       "action": "key_volumedown",
       "col": 42,
-      "row": 17,
       "colspan": 20,
+      "id": "9",
+      "label": "-",
+      "page": 1,
+      "row": 17,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "10",
-      "label": "Pause",
       "action": "key_playpause",
       "col": 22,
-      "row": 37,
       "colspan": 20,
+      "id": "10",
+      "label": "Pause",
+      "page": 1,
+      "row": 37,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     },
     {
-      "type": "button",
-      "id": "11",
-      "label": "F5",
       "action": "key_f5",
       "col": 62,
-      "row": 17,
       "colspan": 20,
+      "id": "11",
+      "label": "F5",
+      "page": 1,
+      "row": 17,
       "rowspan": 20,
-      "page": 1
+      "type": "button"
     }
-  ]
+  ],
+  "grid": {
+    "backgrounds": {
+      "1": "fond3.jpg",
+      "2": "",
+      "3": "",
+      "4": "fond4.jpg"
+    },
+    "cols": 100,
+    "rows": 100
+  },
+  "nb_page": 1
 }

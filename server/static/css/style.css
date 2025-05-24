@@ -34,6 +34,13 @@ html, body {
     box-sizing: border-box; /* Inclure les bordures et paddings dans la largeur totale */
 }
 
+#grid.background-image,
+#editor-grid.background-image {
+    background-size: cover; /* ou contain selon ton besoin */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 #grid button:active {
     background-color: #000000; /* Fond lors du clic */
 }

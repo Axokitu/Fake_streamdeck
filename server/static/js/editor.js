@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const buttonRowspanInput = document.getElementById("button-rowspan");
     const buttonPageInput = document.getElementById("button-page"); // Nouveau champ pour la page
     const deleteButton = document.getElementById("delete-button");
+    const backgroundSelect = document.getElementById("background-select");
 
     // Stocker les éléments ajoutés
     const elements = [];
@@ -48,6 +49,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                     grid.appendChild(button);
                     elements.push(element);
                 });
+
+            // Charger l'image de fond si elle est définie
+            const page = currentPage.toString();
+            const backgrounds = data.grid.backgrounds || {};
+            if (backgrounds[page]) {
+                grid.style.backgroundImage = `url('/config/${backgrounds[page]}')`;
+                grid.classList.add("background-image");
+                backgroundSelect.value = backgrounds[page];
+            } else {
+                grid.style.backgroundImage = "";
+                grid.classList.remove("background-image");
+                backgroundSelect.value = "";
+            }
         } catch (error) {
             console.error("Erreur lors du chargement des données :", error);
         }
@@ -181,11 +195,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             const exportData = {
                 grid: {
                     cols: parseInt(colsInput.value, 10),
-                    rows: parseInt(rowsInput.value, 10)
+                    rows: parseInt(rowsInput.value, 10),
+                    backgrounds: {} // Changer ici
                 },
                 nb_page: existingData.nb_page, // Conserver le nombre de pages
                 elements: updatedElements
             };
+
+            // Ajouter les arrière-plans existants
+            const page = currentPage.toString();
+            if (!exportData.grid.backgrounds) exportData.grid.backgrounds = {};
+            exportData.grid.backgrounds[page] = backgroundSelect.value || "";
 
             // Exporter les données mises à jour
             const exportResponse = await fetch('/config/interface_v1.json', {
@@ -387,5 +407,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             console.error("Numéro de page invalide !");
         }
+    });
+
+    backgroundSelect.addEventListener("change", async () => {
+        const page = currentPage.toString();
+        // Charge les données existantes
+        const response = await fetch('/config/interface_v1.json');
+        const data = await response.json();
+        if (!data.grid.backgrounds) data.grid.backgrounds = {};
+        data.grid.backgrounds[page] = backgroundSelect.value || "";
+        // Met à jour l'affichage
+        if (backgroundSelect.value) {
+            grid.style.backgroundImage = `url('/config/${backgroundSelect.value}')`;
+            grid.classList.add("background-image");
+        } else {
+            grid.style.backgroundImage = "";
+            grid.classList.remove("background-image");
+        }
+        // Sauvegarde
+        await fetch('/config/interface_v1.json', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data, null, 2)
+        });
     });
 });

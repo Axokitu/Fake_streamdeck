@@ -52,6 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         grid.appendChild(button);
                     }
                 });
+
+            // Appliquer le fond d'écran si défini dans la config
+            const page = currentPage.toString();
+            const backgrounds = gridConfig.backgrounds || {};
+            if (backgrounds[page]) {
+                grid.style.backgroundImage = `url('/config/${backgrounds[page]}')`;
+                grid.classList.add("background-image");
+            } else {
+                grid.style.backgroundImage = "";
+                grid.classList.remove("background-image");
+            }
         })
         .catch(err => console.error("Erreur lors du chargement de l'interface :", err));
 });
