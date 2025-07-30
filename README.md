@@ -1,6 +1,6 @@
 # 🧰 Fake Streamdeck Web Interface
 
-Ce dépôt contient une application web développée en Python, accessible sur le port `:5000`, servant d'interface Streamdeck simplifiée pour une tablette dédiée.
+Ce repo contient une application web développée en Python, accessible sur le port `:5000`, servant d'interface Streamdeck simplifiée pour une tablette dédiée. Cela reprend les fonctionalité du streamdeck mais sur une tablette et en opensource
 
 ## 🌐 Fonctionnement général
 
