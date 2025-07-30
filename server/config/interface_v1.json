@@ -6,17 +6,6 @@
       "colspan": 6,
       "id": "1",
       "label": "Home",
-      "page": 4,
-      "row": 3,
-      "rowspan": 10,
-      "type": "button"
-    },
-    {
-      "action": "set_page_3",
-      "col": 2,
-      "colspan": 6,
-      "id": "1",
-      "label": "Home",
       "page": 2,
       "row": 3,
       "rowspan": 10,
@@ -164,14 +153,23 @@
       "row": 17,
       "rowspan": 20,
       "type": "button"
+    },
+    {
+      "action": "set_page_3",
+      "col": 2,
+      "colspan": 6,
+      "id": "1",
+      "label": "Home",
+      "page": 4,
+      "row": 3,
+      "rowspan": 10,
+      "type": "button"
     }
   ],
   "grid": {
     "backgrounds": {
       "1": "fond3.jpg",
-      "2": "",
-      "3": "",
-      "4": "fond4.jpg"
+      "4": "fond2.jpg"
     },
     "cols": 100,
     "rows": 100
